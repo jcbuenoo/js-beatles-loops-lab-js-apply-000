@@ -19,6 +19,8 @@ final class GuardOverlayController {
     }
 
     func show() {
+        // Hide the Dock and menu bar while the screen is up, so they can't be clicked around it.
+        NSApp.presentationOptions = [.hideDock, .hideMenuBar]
         NSApp.activate(ignoringOtherApps: true)
         let mainScreen = NSScreen.main ?? NSScreen.screens.first
         for screen in NSScreen.screens {
@@ -43,6 +45,7 @@ final class GuardOverlayController {
 
     func close() {
         model.stop()
+        NSApp.presentationOptions = []
         let closing = windows
         closing.forEach { $0.orderOut(nil) }
         // Free the views after the button tap that closed them has finished.

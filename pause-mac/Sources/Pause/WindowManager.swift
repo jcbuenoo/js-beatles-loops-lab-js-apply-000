@@ -57,6 +57,8 @@ final class WindowManager: NSObject, NSWindowDelegate {
 
         NSApp.activate(ignoringOtherApps: true)
         window.makeKeyAndOrderFront(nil)
+        // Don't start with a field selected (a stray keypress could change a schedule).
+        window.makeFirstResponder(nil)
     }
 
     func windowWillClose(_ notification: Notification) {

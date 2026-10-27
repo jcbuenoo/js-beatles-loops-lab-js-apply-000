@@ -58,7 +58,8 @@ struct SettingsView: View {
                 Spacer()
             }
             HStack {
-                TextField("Website, e.g. reddit.com", text: $newSite)
+                TextField("Add website", text: $newSite, prompt: Text("reddit.com"))
+                    .textFieldStyle(.roundedBorder)
                     .onSubmit(addSite)
                 Picker("Mode", selection: $newSiteMode) {
                     ForEach(GuardMode.allCases) { Text($0.label).tag($0) }
