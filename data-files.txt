@@ -1,0 +1,14 @@
+/var/folders/nj/vtw8zd2j31d1gdrtntc5y4600000gn/T/tmp.ZSE19QiLaM/pause-data:
+total 16
+drwxr-xr-x  5 runner  staff   160 Oct 27 16:48 .
+drwx------  3 runner  staff    96 Oct 27 16:47 ..
+drwxr-xr-x  3 runner  staff    96 Oct 27 16:48 activity
+-rw-r--r--  1 runner  staff  1094 Oct 27 16:48 settings.json
+-rw-r--r--  1 runner  staff  1852 Oct 27 16:48 urges.json
+
+/var/folders/nj/vtw8zd2j31d1gdrtntc5y4600000gn/T/tmp.ZSE19QiLaM/pause-data/activity:
+total 8
+drwxr-xr-x  3 runner  staff    96 Oct 27 16:48 .
+drwxr-xr-x  5 runner  staff   160 Oct 27 16:48 ..
+-rw-r--r--  1 runner  staff  3332 Oct 27 16:48 2026-10-27.json
+ 12K	/var/folders/nj/vtw8zd2j31d1gdrtntc5y4600000gn/T/tmp.ZSE19QiLaM/pause-data

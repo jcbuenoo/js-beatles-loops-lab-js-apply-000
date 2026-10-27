@@ -1,0 +1,101 @@
+Building…
+0%: Compute target dependency graph
+Building targets in dependency order
+Target dependency graph (2 targets)
+0%: Gather provisioning inputs
+0%: Create build description
+0%: Discovering version info for swiftc
+0%: Discovering version info for clang
+0%: Discovering version info for ld
+Build description signature: ef17e5f47e6207516b563eb51d7c39dc
+
+Build description path: /Users/runner/work/js-beatles-loops-lab-js-apply-000/js-beatles-loops-lab-js-apply-000/pause-mac/.build/apple/Intermediates.noindex/XCBuildData/ef17e5f47e6207516b563eb51d7c39dc.xcbuilddata
+
+0%: Build stat cache for /Applications/Xcode_16.4.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk
+0%: Create build directory $(TARGET_BUILD_DIR)
+0%: Create build directory $(OBJROOT)
+0%: Create build directory $(TARGET_BUILD_DIR)/Release
+0%: Create build directory $(OBJROOT)/EagerLinkingTBDs/Release
+0%: Create build directory $(TARGET_BUILD_DIR)/Release/PackageFrameworks
+0%: Write Pause.DependencyStaticMetadataFileList
+0%: Write Pause.DependencyMetadataFileList
+0%: Write Pause_const_extract_protocols.json (x86_64)
+0%: Write Pause.SwiftFileList (x86_64)
+0%: Write Pause.LinkFileList (x86_64)
+0%: Write Pause-OutputFileMap.json (x86_64)
+0%: Write Pause_const_extract_protocols.json (arm64)
+0%: Write Pause.SwiftFileList (arm64)
+0%: Write Pause.LinkFileList (arm64)
+0%: Write Pause-OutputFileMap.json (arm64)
+0%: Write PauseCore_Module.DependencyStaticMetadataFileList
+0%: Write PauseCore_Module.DependencyMetadataFileList
+0%: Write PauseCore.modulemap
+0%: Write PauseCore_Module_const_extract_protocols.json (x86_64)
+0%: Write PauseCore_Module.SwiftFileList (x86_64)
+0%: Write PauseCore_Module.SwiftConstValuesFileList
+0%: Write PauseCore_Module.LinkFileList (x86_64)
+0%: Write PauseCore_Module-OutputFileMap.json (x86_64)
+0%: Write PauseCore_Module_const_extract_protocols.json (arm64)
+0%: Write PauseCore_Module.SwiftFileList (arm64)
+0%: Write PauseCore_Module.SwiftConstValuesFileList
+0%: Write PauseCore_Module.LinkFileList (arm64)
+0%: Write PauseCore_Module-OutputFileMap.json (arm64)
+0%: Copy PauseCore.modulemap
+46%: Planning Swift module PauseCore (x86_64)
+46%: Planning Swift module PauseCore (arm64)
+47%: Compiling ActivityRecorder.swift, DayReport.swift, DomainMatcher.swift, GuardPolicy.swift, Models.swift, Settings.swift, Store.swift, UrgeInsights.swift
+47%: Compiling ActivityRecorder.swift, DayReport.swift, DomainMatcher.swift, GuardPolicy.swift, Models.swift, Settings.swift, Store.swift, UrgeInsights.swift
+47%: Compile PauseCore_Module (x86_64)
+47%: Compile PauseCore_Module (arm64)
+47%: Compile 8 Swift source files (x86_64)
+47%: Compile 8 Swift source files (arm64)
+51%: Discovering Swift tasks after 'Compiling ActivityRecorder.swift, DayReport.swift, DomainMatcher.swift, GuardPolicy.swift, Models.swift, Settings.swift, Store.swift, UrgeInsights.swift'
+51%: Unblock downstream dependents of PauseCore_Module (arm64)
+51%: Copy PauseCore.swiftmodule (arm64)
+51%: Copy PauseCore.swiftdoc (arm64)
+51%: Copy PauseCore.abi.json (arm64)
+51%: Copy PauseCore.swiftsourceinfo (arm64)
+59%: Discovering Swift tasks after 'Compiling ActivityRecorder.swift, DayReport.swift, DomainMatcher.swift, GuardPolicy.swift, Models.swift, Settings.swift, Store.swift, UrgeInsights.swift'
+59%: Unblock downstream dependents of PauseCore_Module (x86_64)
+59%: Merge Objective-C generated interface headers
+59%: Copy PauseCore.swiftmodule (x86_64)
+59%: Copy PauseCore.swiftdoc (x86_64)
+59%: Copy PauseCore.abi.json (x86_64)
+59%: Copy PauseCore.swiftsourceinfo (x86_64)
+59%: Link PauseCore_Module.o (x86_64)
+59%: Link PauseCore_Module.o (arm64)
+59%: Planning Swift module Pause (x86_64)
+59%: Planning Swift module Pause (arm64)
+59%: Compiling ActivityTracker.swift, AppState.swift, BrowserBridge.swift, DayReportView.swift, Demo.swift, GuardOverlay.swift, Guardian.swift, HotKey.swift, Launch.swift, Notifier.swift, SettingsView.swift, SharedViews.swift, StatusMenu.swift, UrgeLogView.swift, UrgeLogger.swift, WindowManager.swift
+59%: Compiling ActivityTracker.swift, AppState.swift, BrowserBridge.swift, DayReportView.swift, Demo.swift, GuardOverlay.swift, Guardian.swift, HotKey.swift, Launch.swift, Notifier.swift, SettingsView.swift, SharedViews.swift, StatusMenu.swift, UrgeLogView.swift, UrgeLogger.swift, WindowManager.swift
+71%: Compile Pause (x86_64)
+71%: Create universal binary PauseCore_Module.o
+71%: Compile Pause (arm64)
+71%: Extract app intents metadata
+71%: Compile 16 Swift source files (x86_64)
+71%: Compile 16 Swift source files (arm64)
+2026-10-27 16:47:06.970 appintentsmetadataprocessor[1558:8298] Starting appintentsmetadataprocessor export
+2026-10-27 16:47:07.053 appintentsmetadataprocessor[1558:8298] Extracted no relevant App Intents symbols, skipping writing output
+
+77%: Register execution policy exception for PauseCore_Module.o
+79%: Discovering Swift tasks after 'Compiling ActivityTracker.swift, AppState.swift, BrowserBridge.swift, DayReportView.swift, Demo.swift, GuardOverlay.swift, Guardian.swift, HotKey.swift, Launch.swift, Notifier.swift, SettingsView.swift, SharedViews.swift, StatusMenu.swift, UrgeLogView.swift, UrgeLogger.swift, WindowManager.swift'
+79%: Unblock downstream dependents of Pause (arm64)
+79%: Link Pause (arm64)
+79%: Copy Pause.swiftmodule (arm64)
+79%: Copy Pause.swiftdoc (arm64)
+79%: Copy Pause.abi.json (arm64)
+79%: Copy Pause.swiftsourceinfo (arm64)
+87%: Discovering Swift tasks after 'Compiling ActivityTracker.swift, AppState.swift, BrowserBridge.swift, DayReportView.swift, Demo.swift, GuardOverlay.swift, Guardian.swift, HotKey.swift, Launch.swift, Notifier.swift, SettingsView.swift, SharedViews.swift, StatusMenu.swift, UrgeLogView.swift, UrgeLogger.swift, WindowManager.swift'
+87%: Unblock downstream dependents of Pause (x86_64)
+87%: Copy Pause.swiftmodule (x86_64)
+87%: Link Pause (x86_64)
+87%: Copy Pause.swiftdoc (x86_64)
+87%: Copy Pause.abi.json (x86_64)
+87%: Copy Pause.swiftsourceinfo (x86_64)
+95%: Create universal binary Pause
+95%: Generate Pause.dSYM for Pause
+98%: Register execution policy exception for Pause
+100%: Build succeeded
+Build complete!
+build/Pause.app: replacing existing signature
+Built /Users/runner/work/js-beatles-loops-lab-js-apply-000/js-beatles-loops-lab-js-apply-000/pause-mac/build/Pause.app

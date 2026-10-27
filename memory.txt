@@ -1,0 +1,54 @@
+== idle after 5s ==
+Pause [1704]: 64-bit    Footprint: 9058 KB (16384 bytes per page)
+    phys_footprint: 9090 KB
+    phys_footprint_peak: 9090 KB
+rss_kb: 48704
+
+== idle after 75s ==
+Pause [1704]: 64-bit    Footprint: 9026 KB (16384 bytes per page)
+    phys_footprint: 9058 KB
+    phys_footprint_peak: 9106 KB
+rss_kb: 48448
+
+== with 'menu' open ==
+Pause [2819]: 64-bit    Footprint: 12 MB (16384 bytes per page)
+    phys_footprint: 12 MB
+    phys_footprint_peak: 12 MB
+rss_kb: 55504
+
+== with 'today' open ==
+Pause [3043]: 64-bit    Footprint: 27 MB (16384 bytes per page)
+    phys_footprint: 27 MB
+    phys_footprint_peak: 27 MB
+rss_kb: 74128
+
+== with 'urges' open ==
+Pause [3238]: 64-bit    Footprint: 29 MB (16384 bytes per page)
+    phys_footprint: 29 MB
+    phys_footprint_peak: 30 MB
+rss_kb: 77392
+
+== with 'settings' open ==
+Pause [3277]: 64-bit    Footprint: 31 MB (16384 bytes per page)
+    phys_footprint: 31 MB
+    phys_footprint_peak: 31 MB
+rss_kb: 81104
+
+== with 'guard' open ==
+Pause [3449]: 64-bit    Footprint: 17 MB (16384 bytes per page)
+    phys_footprint: 17 MB
+    phys_footprint_peak: 17 MB
+rss_kb: 70576
+
+== with 'block' open ==
+Pause [3629]: 64-bit    Footprint: 17 MB (16384 bytes per page)
+    phys_footprint: 17 MB
+    phys_footprint_peak: 17 MB
+rss_kb: 70784
+
+== with 'urge-logger' open ==
+Pause [3794]: 64-bit    Footprint: 19 MB (16384 bytes per page)
+    phys_footprint: 19 MB
+    phys_footprint_peak: 19 MB
+rss_kb: 71904
+
