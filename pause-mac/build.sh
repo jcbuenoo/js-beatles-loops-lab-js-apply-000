@@ -11,9 +11,15 @@ if ! command -v swift >/dev/null; then
     exit 1
 fi
 
+# UNIVERSAL=1 builds one app that runs on both Apple Silicon and Intel Macs (needs full Xcode).
+BUILD_ARGS=(-c release)
+if [[ "${UNIVERSAL:-0}" == "1" ]]; then
+    BUILD_ARGS+=(--arch arm64 --arch x86_64)
+fi
+
 echo "Building…"
-swift build -c release --product Pause
-BIN_DIR="$(swift build -c release --show-bin-path)"
+swift build "${BUILD_ARGS[@]}" --product Pause
+BIN_DIR="$(swift build "${BUILD_ARGS[@]}" --show-bin-path)"
 
 APP="build/Pause.app"
 rm -rf "$APP"
