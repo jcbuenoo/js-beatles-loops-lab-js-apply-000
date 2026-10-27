@@ -1,0 +1,75 @@
+# Builds the Pause Mac app on GitHub's Mac runners, so it can be downloaded without
+# installing Xcode. Every successful build replaces the "pause-latest" release.
+name: Build Pause (Mac app)
+
+on:
+  push:
+    paths:
+      - "pause-mac/**"
+      - ".github/workflows/pause-mac.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: macos-15
+    defaults:
+      run:
+        working-directory: pause-mac
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show toolchain
+        run: |
+          xcodebuild -version
+          swift --version
+
+      - name: Test core logic
+        run: swift test
+
+      - name: Build Pause.app (Apple Silicon + Intel)
+        run: |
+          set -o pipefail
+          UNIVERSAL=1 bash build.sh 2>&1 | tee build.log
+          echo "### Compiler warnings"
+          grep -E "warning:" build.log | sort -u | tee warnings.txt || echo "none"
+
+      - name: Run the app (crash check, memory, screenshots)
+        run: bash ci/smoke-test.sh
+
+      - name: Save test results to the pause-ci-results branch
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p ci-results
+          cp build.log warnings.txt ci-results/ 2>/dev/null || true
+          cd ci-results
+          echo "Commit: $GITHUB_SHA  Run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" > README.txt
+          git init -q
+          git checkout -q -b pause-ci-results
+          git add -A
+          git -c user.name="pause-ci" -c user.email="pause-ci@users.noreply.github.com" commit -qm "Test results for ${GITHUB_SHA::7}"
+          git push -qf "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" pause-ci-results
+
+      - name: Zip the app
+        # ditto keeps the app bundle's permissions and signature intact.
+        run: ditto -c -k --keepParent build/Pause.app build/Pause.zip
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Pause
+          path: pause-mac/build/Pause.zip
+
+      - name: Publish download (release "pause-latest")
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete pause-latest --yes --cleanup-tag || true
+          gh release create pause-latest build/Pause.zip \
+            --target "$GITHUB_SHA" \
+            --prerelease \
+            --title "Pause (latest build)" \
+            --notes "Download Pause.zip, unzip it, and drag Pause.app into Applications. Built from ${GITHUB_SHA::7} on branch ${GITHUB_REF_NAME}."
