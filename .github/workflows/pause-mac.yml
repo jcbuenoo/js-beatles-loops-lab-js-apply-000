@@ -30,7 +30,29 @@ jobs:
         run: swift test
 
       - name: Build Pause.app (Apple Silicon + Intel)
-        run: UNIVERSAL=1 bash build.sh
+        run: |
+          set -o pipefail
+          UNIVERSAL=1 bash build.sh 2>&1 | tee build.log
+          echo "### Compiler warnings"
+          grep -E "warning:" build.log | sort -u | tee warnings.txt || echo "none"
+
+      - name: Run the app (crash check, memory, screenshots)
+        run: bash ci/smoke-test.sh
+
+      - name: Save test results to the pause-ci-results branch
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p ci-results
+          cp build.log warnings.txt ci-results/ 2>/dev/null || true
+          cd ci-results
+          echo "Commit: $GITHUB_SHA  Run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" > README.txt
+          git init -q
+          git checkout -q -b pause-ci-results
+          git add -A
+          git -c user.name="pause-ci" -c user.email="pause-ci@users.noreply.github.com" commit -qm "Test results for ${GITHUB_SHA::7}"
+          git push -qf "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" pause-ci-results
 
       - name: Zip the app
         # ditto keeps the app bundle's permissions and signature intact.

@@ -55,6 +55,8 @@ final class UrgeLoggerController: NSObject, NSWindowDelegate {
     }
 
     func windowWillClose(_ notification: Notification) {
+        let closing = panel
+        Task { @MainActor in closing?.contentView = nil }
         panel = nil
         previousApp?.activate(options: [.activateIgnoringOtherApps])
         previousApp = nil

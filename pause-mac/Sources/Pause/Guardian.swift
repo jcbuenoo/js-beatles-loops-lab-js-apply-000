@@ -59,8 +59,16 @@ final class Guardian {
         state.objectWillChange.send()
     }
 
+    /// Shows a guard screen without anything being opened (screenshot tests).
+    func preview(_ rule: GuardRule?) {
+        guard let rule, overlayRule == nil else { return }
+        let me = NSRunningApplication.current
+        let front = Frontmost(app: me, bundleID: "demo", name: "Safari", host: rule.kind == .website ? rule.value : nil)
+        present(rule, front: front, now: Date())
+    }
+
     private func present(_ rule: GuardRule, front: Frontmost, now: Date) {
-        if rule.kind == .app { front.app.hide() }
+        if rule.kind == .app, front.bundleID != "demo" { front.app.hide() }
 
         let opens = GuardPolicy.opensToday(of: rule, urges: state.urges, now: now, calendar: state.calendar)
         let requirements = GuardPolicy.requirements(for: rule, opensToday: opens, settings: state.settings)

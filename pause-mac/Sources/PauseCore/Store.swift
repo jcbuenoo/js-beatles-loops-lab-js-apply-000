@@ -68,9 +68,9 @@ public final class Store {
         for (_, daySpans) in byDay {
             guard let first = daySpans.first else { continue }
             let file = activityFile(for: first.start)
-            var existing = read([ActivitySpan].self, from: file) ?? []
-            existing.append(contentsOf: daySpans)
-            write(existing, to: file)
+            let existing = read([ActivitySpan].self, from: file) ?? []
+            // Merging back-to-back pieces keeps day files (and the memory to load them) small.
+            write(ActivitySpan.merged(existing + daySpans), to: file)
         }
     }
 

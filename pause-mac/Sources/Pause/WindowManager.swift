@@ -63,6 +63,9 @@ final class WindowManager: NSObject, NSWindowDelegate {
         guard let window = notification.object as? NSWindow,
               let kind = windows.first(where: { $0.value === window })?.key
         else { return }
+        // Drop the SwiftUI view tree now so a closed window gives its memory back.
+        // (Deferred a moment: the close may have come from a button inside that same view.)
+        Task { @MainActor in window.contentView = nil }
         windows[kind] = nil
     }
 }

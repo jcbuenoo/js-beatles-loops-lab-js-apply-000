@@ -134,6 +134,33 @@ final class RecorderAndReportTests: XCTestCase {
         XCTAssertEqual(parts.map(\.duration), [600, 600])
     }
 
+    func testMergeJoinsBackToBackPiecesOnly() {
+        let t0 = Date(timeIntervalSince1970: 1_000_000)
+        let spans = [
+            ActivitySpan(start: t0, end: t0 + 60, sample: xcode),
+            ActivitySpan(start: t0 + 60, end: t0 + 120, sample: xcode),
+            ActivitySpan(start: t0 + 120, end: t0 + 130, sample: safari),
+            ActivitySpan(start: t0 + 130, end: t0 + 140, sample: xcode),
+            ActivitySpan(start: t0 + 400, end: t0 + 460, sample: xcode), // after a break: stays separate
+        ]
+        let merged = ActivitySpan.merged(spans)
+        XCTAssertEqual(merged.map(\.duration), [120, 10, 10, 60])
+        XCTAssertEqual(merged.reduce(0) { $0 + $1.duration }, spans.reduce(0) { $0 + $1.duration })
+    }
+
+    func testStoreMergesAppendedPieces() {
+        let dir = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        defer { try? FileManager.default.removeItem(at: dir) }
+        let store = Store(root: dir, calendar: calendar)
+        let t0 = calendar.date(from: DateComponents(year: 2026, month: 10, day: 27, hour: 10))!
+        for minute in 0..<30 {
+            store.appendActivity([ActivitySpan(start: t0 + Double(minute * 60), end: t0 + Double(minute * 60 + 60), sample: xcode)])
+        }
+        let saved = store.loadActivity(for: t0)
+        XCTAssertEqual(saved.count, 1)
+        XCTAssertEqual(saved.first?.duration, 1800)
+    }
+
     func testDayReport() {
         let day = calendar.date(from: DateComponents(year: 2026, month: 10, day: 27, hour: 9))!
         let spans = [

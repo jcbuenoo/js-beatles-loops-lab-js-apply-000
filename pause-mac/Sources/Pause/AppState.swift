@@ -29,7 +29,9 @@ final class AppState: ObservableObject {
     private var todayCache: (key: String, spans: [ActivitySpan])?
 
     private init() {
-        let store = Store(root: Store.defaultRoot)
+        // PAUSE_DATA_DIR lets the automated tests use a throwaway folder instead of your real data.
+        let root = ProcessInfo.processInfo.environment["PAUSE_DATA_DIR"].map { URL(fileURLWithPath: $0, isDirectory: true) }
+        let store = Store(root: root ?? Store.defaultRoot)
         self.store = store
         settings = store.loadSettings()
         urges = store.loadUrges()
@@ -43,7 +45,7 @@ final class AppState: ObservableObject {
         hotKey = HotKey(keyCode: HotKey.keyU, modifiers: HotKey.optionCommand) { [weak self] in
             self?.urgeLogger.show()
         }
-        Notifier.shared.setUp()
+        if Demo.scene == nil { Notifier.shared.setUp() }
     }
 
     func stop() {

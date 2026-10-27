@@ -49,7 +49,8 @@ final class ActivityTracker: NSObject {
         dnc.addObserver(self, selector: #selector(cameBack(_:)), name: NSNotification.Name("com.apple.screenIsUnlocked"), object: nil)
 
         tickTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(tick), userInfo: nil, repeats: true)
-        tickTimer?.tolerance = 0.5
+        // Generous tolerance lets macOS batch the wake-ups with other work, which saves energy.
+        tickTimer?.tolerance = 1
         saveTimer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(flush), userInfo: nil, repeats: true)
         tick()
     }

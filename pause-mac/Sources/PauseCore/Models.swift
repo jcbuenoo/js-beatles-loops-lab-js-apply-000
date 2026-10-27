@@ -86,6 +86,22 @@ public struct ActivitySpan: Codable, Equatable {
         return parts
     }
 
+    /// Joins spans of the same app/site that follow each other within `maxGap` seconds.
+    /// The tracker saves time in one-minute pieces; this turns them back into one span per sitting.
+    public static func merged(_ spans: [ActivitySpan], maxGap: TimeInterval = 5) -> [ActivitySpan] {
+        var result: [ActivitySpan] = []
+        result.reserveCapacity(spans.count)
+        for span in spans.sorted(by: { $0.start < $1.start }) {
+            if var last = result.last, last.key == span.key, span.start.timeIntervalSince(last.end) <= maxGap {
+                last.end = max(last.end, span.end)
+                result[result.count - 1] = last
+            } else {
+                result.append(span)
+            }
+        }
+        return result
+    }
+
     /// The part of the span inside `interval`, or nil if they don't overlap.
     public func clipped(to interval: DateInterval) -> ActivitySpan? {
         let s = max(start, interval.start)

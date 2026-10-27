@@ -43,7 +43,10 @@ final class GuardOverlayController {
 
     func close() {
         model.stop()
-        windows.forEach { $0.orderOut(nil) }
+        let closing = windows
+        closing.forEach { $0.orderOut(nil) }
+        // Free the views after the button tap that closed them has finished.
+        Task { @MainActor in closing.forEach { $0.contentView = nil } }
         windows = []
     }
 }
